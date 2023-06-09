@@ -1,0 +1,26 @@
+import axios from 'axios';
+
+class TrainSchedule extends React.Component {
+  state = {
+    trains: []
+  }
+
+  componentDidMount() {
+    axios.get('/api/trains')
+      .then(res => {
+        const trains = res.data;
+        this.setState({ trains });
+      })
+  }
+
+  render() {
+    return (
+      <div>
+        <h2>Train Schedule</h2>
+        <ul>
+          { this.state.trains.map(train => <li key={train.id}>{train.name}</li>)}
+        </ul>
+      </div>
+    )
+  }
+}
